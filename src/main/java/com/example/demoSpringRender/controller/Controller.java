@@ -43,7 +43,7 @@ public class Controller {
 	            model.addAttribute("usernamePrin", "");
 	        }
  
-		return "index";
+		return "product";
 	}
 	@GetMapping("/showLoginPage")
 	public String login() {
