@@ -19,7 +19,7 @@ public class Controller {
     @Autowired
     private ProductRepository productRepository;
 
-	@GetMapping("/")
+	@GetMapping("./")
 	public String index(Model model, Principal principal, @RequestParam(value = "searchTerm", required = false) String searchTerm) {
 		 List<Product> topProducts;
 	        List<Product> regularProducts;
