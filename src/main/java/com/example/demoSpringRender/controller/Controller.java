@@ -2,9 +2,11 @@ package com.example.demoSpringRender.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demoSpringRender.repo.ProductRepository;
@@ -43,8 +45,25 @@ public class Controller {
 	            model.addAttribute("usernamePrin", "");
 	        }
  
-		return "index";
+		return "temp";
 	}
+	
+
+	
+	 @GetMapping("/product/{productId}")
+	    public String showProduct(@PathVariable Long productId, Model model) {
+	        // Tìm sản phẩm theo ID
+	        Optional<Product> product = productRepository.findById(productId);
+
+	        if (product.isPresent()) {
+	            model.addAttribute("product", product.get());
+	            return "product";
+	        }
+
+	        // Xử lý khi không tìm thấy sản phẩm
+	        return "redirect:/"; // Hoặc bạn có thể thêm trang lỗi 404 ở đây.
+	    }
+	
 	@GetMapping("/showLoginPage")
 	public String login() {
 		return "login";

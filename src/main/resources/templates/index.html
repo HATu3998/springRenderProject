@@ -1,20 +1,12 @@
 	<!DOCTYPE html>
 	<html>
 	<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<!------ Include the above in your HEAD tag ---------->
-	<link rel="stylesheet" type="text/css" href="/static/css/product.css">
-	
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-	
-	    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	  <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/product.css">
+    
 	<style>
 h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
@@ -238,7 +230,7 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	        <div class="col-md-3 col-sm-6" th:each="product : ${topProducts}">
 	            <div class="product-grid2">
 	                <div class="product-image2">
-	                    <a href="#">
+	                    <a  th:href="@{'/product/' + ${product.id}}">
 	                        <img class="pic-1" th:src="${product.imageUrl}">
 	                        <img class="pic-2" th:src="${product.imageUrlSe}">
 	                    </a>
@@ -246,7 +238,8 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	                        <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
 	                      
 	                         <li>
-	                            <form th:action="@{/api/cart/add}" method="post">
+	                        <form th:object="${product}" th:action="@{/api/cart/add}" method="post">
+
 	                                <input type="hidden" name="productId" th:value="${product.id}" />
 	                                <input type="hidden" name="quantity" value="1" />
 	                                <input type="hidden" name="username" th:value="${usernamePrin}" />
@@ -258,7 +251,7 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	                 
 	                </div>
 	                <div class="product-content">
-	                    <h3 class="title"><a href="#" th:text="${product.name}"></a></h3>
+	                    <h3 class="title">  <h3 class="title"><a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a> </h3>
 	                   <div class="price">
 	                    <span class="strikethrough" th:text="${product.priceFirst}"></span>
 	                      <p th:text="${product.price}"></p>
@@ -305,7 +298,8 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	                    <li class="fa fa-star disable"></li>
 	                </ul>
 	                <div class="product-content">
-	                    <h3 class="title"><a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a></h3>
+	                  
+	                    <h3 class="title">  <h3 class="title"><a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a></h3></h3>
 	                    <div class="price">
 	                    <span th:text="${product.priceFirst}"></span>
 	                      <p th:text="${product.price}"></p>
@@ -319,7 +313,9 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	
 	    
 	<hr>
-	
+	  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
 	
 	       
 	<hr>

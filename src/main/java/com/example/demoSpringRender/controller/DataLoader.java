@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.example.demoSpringRender.repo.*;
 
 import com.example.demoSpringRender.model.*;
-@Component
+//@Component
 public class DataLoader implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
