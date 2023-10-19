@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Import các tài nguyên CSS và JavaScript cần thiết -->
+</head>
+<body>
+ <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Giỏ Hàng Của Bạn</h3>
+            <div th:each="item : ${ca}" class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img th:src="${item.product.imageUrl}" class="card-img" alt="Product Image">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${item.product.name}"></h5>
+                            <p class="card-text">Số lượng: <span th:text="${item.quantity}"></span></p>
+                            <p class="card-text">Thành tiền: <span th:text="${item.total_price}"></span> đ</p>
+                            <a th:href="@{'/api/cart/remove/' + ${item.id}}" class="btn btn-danger">Xóa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

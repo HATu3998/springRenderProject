@@ -9,18 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demoSpringRender.repo.CartItemRepository;
 import com.example.demoSpringRender.repo.ProductRepository;
+import com.example.demoSpringRender.model.CartItem;
 import com.example.demoSpringRender.model.Product;
  
 
 import org.springframework.ui.Model;
-
+import java.util.*;
 
 @org.springframework.stereotype.Controller
 public class Controller {
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private CartItemRepository cartItemRepository;
 	@GetMapping("/")
 	public String index(Model model, Principal principal, @RequestParam(value = "searchTerm", required = false) String searchTerm) {
 		 List<Product> topProducts;
@@ -63,7 +66,18 @@ public class Controller {
 	        // Xử lý khi không tìm thấy sản phẩm
 	        return "redirect:/"; // Hoặc bạn có thể thêm trang lỗi 404 ở đây.
 	    }
-	
+	 @GetMapping("/card")
+	 public String card(Model model, Principal principal) {
+	     List<CartItem> ca = new ArrayList<>();
+
+	     if (principal != null) {
+	         ca = cartItemRepository.findByUsername(principal.getName());
+	     }
+
+	     model.addAttribute("ca", ca);
+	     return "cart";
+	 }
+
 	@GetMapping("/showLoginPage")
 	public String login() {
 		return "login";
