@@ -4,29 +4,32 @@
     <!-- Import các tài nguyên CSS và JavaScript cần thiết -->
 </head>
 <body>
- <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Giỏ Hàng Của Bạn</h3>
-            <div th:each="item : ${ca}" class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img th:src="${item.product.imageUrl}" class="card-img" alt="Product Image">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${item.product.name}"></h5>
-                            <p class="card-text">Số lượng: <span th:text="${item.quantity}"></span></p>
-                            <p class="card-text">Thành tiền: <span th:text="${item.total_price}"></span> đ</p>
-                            <a th:href="@{'/api/cart/remove/' + ${item.id}}" class="btn btn-danger">Xóa</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Giỏ Hàng Của Bạn</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Hình ảnh</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Thành tiền (đ)</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${ca}">
+                            <td><img th:src="${item.product.imageUrl}" width="100" height="100" alt="Product Image"></td>
+                            <td th:text="${item.product.name}"></td>
+                            <td th:text="${item.quantity}"></td>
+                            <td th:text="${item.total_price}"></td>
+                            <td><a th:href="@{'/api/cart/remove/' + ${item.id}}" class="btn btn-danger">Xóa</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
-
-
 </body>
 </html>

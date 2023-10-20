@@ -1,6 +1,7 @@
 package com.example.demoSpringRender.controller;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,26 +33,27 @@ public class CartController {
         return cartItemRepository.findByUsername(username);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<CartItem> addToCart(@RequestParam("productId") Long productId,
-            @RequestParam("quantity") int quantity,
-            @RequestParam("username") String username,
-            @RequestParam("price") BigDecimal price) {
-    	Product product = productRepository.findById(productId).orElse(null);
+    @GetMapping("/add")
+    public ResponseEntity<CartItem> addToCart(Principal principal, 
+    	    @RequestParam("productId") Long productId,
+    	    @RequestParam("quantity") int quantity,
+    	    @RequestParam("username") String username,
+    	    @RequestParam("price") BigDecimal price) {
 
-        if (product == null) {
-            return ResponseEntity.notFound().build();
-        }
+    	    Product product = productRepository.findById(productId).orElse(null);
 
-        // Tạo một đối tượng CartItem và lưu thông tin vào đó
-        CartItem cartItem = new CartItem(username, product, quantity, price);
+    	    if (product == null) {
+    	        return ResponseEntity.notFound().build();
+    	    }
 
-        // Lưu CartItem vào cơ sở dữ liệu
-        cartItem = cartItemRepository.save(cartItem);
+    	    // Tạo một đối tượng CartItem và lưu thông tin vào đó
+    	    CartItem cartItem = new CartItem(username, product, quantity, price);
 
-        return ResponseEntity.ok(cartItem);
-    }
+    	    // Lưu CartItem vào cơ sở dữ liệu
+    	    cartItem = cartItemRepository.save(cartItem);
 
+    	    return ResponseEntity.ok(cartItem);
+    	}
 
     // Thêm các phương thức khác cho cập nhật giỏ hàng, xóa sản phẩm khỏi giỏ hàng, và thao tác giỏ hàng
 }

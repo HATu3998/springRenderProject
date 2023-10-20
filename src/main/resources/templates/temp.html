@@ -126,6 +126,8 @@
 	            </li>
 	            <li class="nav-item" sec:authorize="isAuthenticated()">
 	               <a class="nav-link" th:href="@{/card}">Card</a>
+	                 
+	               <a th:href="@{'/card/' + ${usernamePrin}}">Xem giỏ hàng</a>
 	                <form action="#" th:action="@{/logout}" method="POST" class="nav-link-form">
 	           
 	                    <input type="submit" name="logout" value="Đăng xuất" class="btn btn-link"/>
@@ -233,7 +235,8 @@
     <a th:href="@{/showLoginPage}" class="fa fa-sign-in"> Mua</a>
 </div>
 <div th:if="${usernamePrin != null and !usernamePrin.isEmpty()}">
-    <a th:href="@{'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${username} + '&price=' + ${product.price}}" class="fa fa-shopping-cart"></a>
+   <a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a>
+
 </div>
 
                     </ul>

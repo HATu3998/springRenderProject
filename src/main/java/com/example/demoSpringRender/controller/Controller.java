@@ -66,12 +66,12 @@ public class Controller {
 	        // Xử lý khi không tìm thấy sản phẩm
 	        return "redirect:/"; // Hoặc bạn có thể thêm trang lỗi 404 ở đây.
 	    }
-	 @GetMapping("/card")
-	 public String card(Model model, Principal principal) {
+	 @GetMapping("/card/{usernamePrin}")
+	 public String card(@PathVariable String usernamePrin, Model model) {
 	     List<CartItem> ca = new ArrayList<>();
 
-	     if (principal != null) {
-	         ca = cartItemRepository.findByUsername(principal.getName());
+	     if (usernamePrin != null) {
+	         ca = cartItemRepository.findByUsername(usernamePrin);
 	     }
 
 	     model.addAttribute("ca", ca);
