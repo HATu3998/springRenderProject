@@ -34,7 +34,7 @@ public class CartController {
     }
 
     @GetMapping("/add")
-    public ResponseEntity<CartItem> addToCart(Principal principal, 
+    public String addToCart(Principal principal, 
     	    @RequestParam("productId") Long productId,
     	    @RequestParam("quantity") int quantity,
     	    @RequestParam("username") String username,
@@ -43,7 +43,7 @@ public class CartController {
     	    Product product = productRepository.findById(productId).orElse(null);
 
     	    if (product == null) {
-    	        return ResponseEntity.notFound().build();
+    	        return "/";
     	    }
 
     	    // Tạo một đối tượng CartItem và lưu thông tin vào đó
@@ -52,8 +52,8 @@ public class CartController {
     	    // Lưu CartItem vào cơ sở dữ liệu
     	    cartItem = cartItemRepository.save(cartItem);
 
-    	    return ResponseEntity.ok(cartItem);
+    	    return "/";
     	}
 
-    // Thêm các phương thức khác cho cập nhật giỏ hàng, xóa sản phẩm khỏi giỏ hàng, và thao tác giỏ hàng
+   
 }

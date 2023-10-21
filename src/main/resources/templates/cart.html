@@ -1,6 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" type="text/css" href="your-styles.css">
+<style>
+/* Định cỡ và căn giữa hình ảnh sản phẩm */
+img {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Định kiểu bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+/* Định kiểu tiêu đề cột */
+th {
+    text-align: left;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+/* Định kiểu hàng chẵn và hàng lẻ khác màu nhau */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Định cỡ văn bản, thêm khoảng cách và viền cho nút Xóa */
+td, th, a {
+    padding: 10px;
+    text-align: center;
+}
+
+a.btn-danger {
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+/* Định kiểu cho hộp chứa */
+.container {
+    padding: 20px;
+}
+
+/* Định kiểu cho phần tổng giá trị */
+p {
+    font-weight: bold;
+}
+
+/* Định kiểu cho tiêu đề */
+h3 {
+    color: #ff5733;
+}
+
+/* Định kiểu cho phần tổng giá trị */
+ 
+
+</style>
     <!-- Import các tài nguyên CSS và JavaScript cần thiết -->
 </head>
 <body>
@@ -24,12 +94,15 @@
                             <td th:text="${item.product.name}"></td>
                             <td th:text="${item.quantity}"></td>
                             <td th:text="${item.total_price}"></td>
-                            <td><a th:href="@{'/api/cart/remove/' + ${item.id}}" class="btn btn-danger">Xóa</a></td>
+                            <td><a th:href="@{'/remove/' + ${item.id}}" class="btn btn-danger">Xóa</a></td>
                         </tr>
                     </tbody>
                 </table>
+                <!-- Hiển thị tổng giá trị ở đây -->
+                <p>Tổng giá trị: $<span th:text="${totalPrice}"></span></p>
             </div>
         </div>
     </div>
 </body>
 </html>
+ 

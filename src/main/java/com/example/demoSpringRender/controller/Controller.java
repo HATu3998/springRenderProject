@@ -1,10 +1,12 @@
 package com.example.demoSpringRender.controller;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,14 +71,49 @@ public class Controller {
 	 @GetMapping("/card/{usernamePrin}")
 	 public String card(@PathVariable String usernamePrin, Model model) {
 	     List<CartItem> ca = new ArrayList<>();
+	     BigDecimal totalPrice = BigDecimal.ZERO; // Initialize total price to 0
 
 	     if (usernamePrin != null) {
 	         ca = cartItemRepository.findByUsername(usernamePrin);
-	     }
 
+	         // Calculate the total price by summing up individual item prices
+	         for (CartItem item : ca) {
+	             BigDecimal itemTotal = item.getTotal_price().multiply(BigDecimal.valueOf(item.getQuantity()));
+	             totalPrice = totalPrice.add(itemTotal);
+	         }
+	     }
+	       model.addAttribute("usernamePrin", usernamePrin);
 	     model.addAttribute("ca", ca);
+	     model.addAttribute("totalPrice", totalPrice); // Set the total price in the model
 	     return "cart";
 	 }
+	 //giỏ hàng xóa sản phẩm
+	 @GetMapping("/remove/{id}")
+	    public String removeFromCart(Principal principal, Model model,@PathVariable Long id) {
+	        CartItem cartItem = cartItemRepository.findById(id).orElse(null);
+	        BigDecimal totalPrice = BigDecimal.ZERO;
+	        if (cartItem == null) {
+	            return "index";
+	        }
+	        List<CartItem> ca = ca = cartItemRepository.findByUsername(principal.getName());
+	        cartItemRepository.delete(cartItem);
+	        List<Product> regularProducts;
+
+	            regularProducts = productRepository.findAll();
+	        
+	        model.addAttribute("regularProducts", regularProducts);
+	        for (CartItem item : ca) {
+	             BigDecimal itemTotal = item.getTotal_price().multiply(BigDecimal.valueOf(item.getQuantity()));
+	             totalPrice = totalPrice.add(itemTotal);
+	         }
+	     
+	       model.addAttribute("usernamePrin", principal.getName());
+	     model.addAttribute("ca", ca);
+	     model.addAttribute("totalPrice", totalPrice); // Set the total price in the model
+
+	        return "cart";
+	    }
+
 
 	@GetMapping("/showLoginPage")
 	public String login() {

@@ -125,10 +125,11 @@
 	                <a class="nav-link" th:href="@{/leaders}">Quản lý</a>
 	            </li>
 	            <li class="nav-item" sec:authorize="isAuthenticated()">
-	               <a class="nav-link" th:href="@{/card}">Card</a>
+	         
 	                 
-	               <a th:href="@{'/card/' + ${usernamePrin}}">Xem giỏ hàng</a>
-	                <form action="#" th:action="@{/logout}" method="POST" class="nav-link-form">
+	               <a class="nav-link" th:href="@{'/card/' + ${usernamePrin}}">Xem giỏ hàng</a ></li>
+  <li class="nav-item" sec:authorize="isAuthenticated()">
+<form action="#" th:action="@{/logout}" method="POST" class="nav-link">
 	           
 	                    <input type="submit" name="logout" value="Đăng xuất" class="btn btn-link"/>
 	                </form>
@@ -193,14 +194,20 @@
                         <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
                     </a>
                     <ul class="social">
-                        <li><a href="#" class="fa fa-search"></a></li>
-                        <li><a href="#" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="#" class="fa fa-shopping-cart"></a></li>
+                        <li><a  th:href="'/product/' + ${product.id}" class="fa fa-search"></a></li>
+                      
+                        <li><div th:if="${usernamePrin == null or usernamePrin.isEmpty()}">
+    <a th:href="@{/showLoginPage}" class="fa fa-shopping-cart"> </a>
+</div>
+<div th:if="${usernamePrin != null and !usernamePrin.isEmpty()}">
+ <a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a>
+
+</div></a></li>
                     </ul>
                     <span class="product-new-label" th:if="${product.productTop}">New</span>
                 </div>
                 <div class="product-content">
-                    <h3 class="title" th:text="${product.name}"></h3>
+               <a  th:href="'/product/' + ${product.id}"></a>    <h3 class="title" th:text="${product.name}"></h3></a>   
                     <ul class="rating">
                         <li class="fa fa-star"></li>
                         <li class="fa fa-star"></li>
@@ -208,9 +215,12 @@
                         <li class="fa fa-star"></li>
                         <li class="fa fa-star"></li>
                     </ul>
-                    <div class="price" th:text="'$' + ${product.price}">
-                        <span th:text="'$' + ${product.priceFirst}"></span>
-                    </div>
+                      <div class="price">
+	                  <span class="strikethrough" th:utext="'$' + ${product.priceFirst}"></span>
+<p th:utext="'$' + ${product.price}"></p>
+
+	                        
+	                    </div>
                 </div>
             </div>
         </div>
@@ -231,19 +241,20 @@
                         <li><a th:href="'/product/' + ${product.id}" class="fa fa-search"></a></li>
                       
                    <!-- Kiểm tra xem người dùng đã đăng nhập hay chưa -->
+  <li>
 <div th:if="${usernamePrin == null or usernamePrin.isEmpty()}">
-    <a th:href="@{/showLoginPage}" class="fa fa-sign-in"> Mua</a>
+    <a th:href="@{/showLoginPage}" class="fa fa-shopping-cart"> </a>
 </div>
 <div th:if="${usernamePrin != null and !usernamePrin.isEmpty()}">
-   <a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a>
+ <a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a>
 
 </div>
-
+</li>
                     </ul>
                     <span class="product-new-label" th:if="${product.productTop}">New</span>
                 </div>
                 <div class="product-content">
-                    <h3 class="title" th:text="${product.name}"></h3>
+<a th:href="'/product/' + ${product.id}"><h3 class="title" th:text="${product.name}"></h3></a>
                     <ul class="rating">
                         <li class="fa fa-star"></li>
                         <li class="fa fa-star"></li>
@@ -251,9 +262,12 @@
                         <li class="fa fa-star"></li>
                         <li class="fa fa-star"></li>
                     </ul>
-                    <div class="price" th:text="'$' + ${product.price}">
-                        <span th:text="'$' + ${product.priceFirst}"></span>
-                    </div>
+                      <div class="price">
+	                 <span class="strikethrough" th:utext="'$' + ${product.priceFirst}"></span>
+<p th:utext="'$' + ${product.price}"></p>
+
+	                        
+	                    </div>
                 </div>
             </div>
         </div>
