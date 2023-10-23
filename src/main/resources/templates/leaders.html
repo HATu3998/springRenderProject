@@ -133,11 +133,6 @@ body {
     }
 }
 
-
-
-
-
-
 /* end navbar */
 </style>
 
@@ -270,10 +265,13 @@ body {
                         <div class="row">
                             <div th:each="product : ${regularProducts}" class="col-md-4 mb-4">
                                 <div class="card">
-                                    <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+                          <a  th:href="'/pro/' + ${product.id}">  <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image"></a>
                                     <div class="card-body">
                                         <h5 th:text="${product.name}" class="card-title"></h5>
+                                         <span class="strikethrough" th:text="'$' + ${product.priceFirst}"></span>
                                         <p th:text="${product.price}" class="card-text"></p>
+                                        
+	                    </div>
                                     </div>
                                 </div>
                             </div>

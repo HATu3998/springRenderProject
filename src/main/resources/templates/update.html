@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+    <style>
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .product-grid7 {
+            margin: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .product-image7 {
+            position: relative;
+        }
+
+        .product-image7 img {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .product-new-label {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: green;
+            color: white;
+            padding: 5px;
+        }
+
+        .product-content {
+            margin-top: 10px;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        .price {
+            font-size: 1rem;
+            font-weight: bold;
+            color: red;
+        }
+
+        .button-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .product-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Products</h1>
+    <div class="row">
+        <div th:each="product : ${products}" class="col-md-3 col-sm-6">
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
+                    <span class="product-new-label" th:if="${product.productTop}">New</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="title" th:text="${product.name}"></h3>
+                    <div class="price" th:text="'$' + ${product.price}">
+                        <span th:text="'$' + ${product.priceFirst}"></span>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <a  th:href="'/product/' + ${product.id}" class="product-button">Update</a>
+                    <a href="#" class="product-button">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

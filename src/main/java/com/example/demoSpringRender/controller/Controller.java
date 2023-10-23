@@ -8,7 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demoSpringRender.repo.CartItemRepository;
@@ -62,12 +64,45 @@ public class Controller {
 
 	        if (product.isPresent()) {
 	            model.addAttribute("product", product.get());
-	            return "product";
+	            return "proUpdate";
 	        }
 
 	        // Xử lý khi không tìm thấy sản phẩm
-	        return "redirect:/"; // Hoặc bạn có thể thêm trang lỗi 404 ở đây.
+	        return "redirect:proUpdate";  
 	    }
+	 
+	 //html update product từ leader
+	 @GetMapping("/pro/{productId}")
+	    public String upProduct(@PathVariable Long productId, Model model) {
+	        // Tìm sản phẩm theo ID
+	        Optional<Product> product = productRepository.findById(productId);
+
+	        if (product.isPresent()) {
+	            model.addAttribute("product", product.get());
+	            return "update";
+	        }
+
+	        // Xử lý khi không tìm thấy sản phẩm
+	        return "redirect:update";  
+	    }
+	 //update controller
+	  @PostMapping("updateSP/update/{id}")
+	    public String updateProduct(@PathVariable Long id, @ModelAttribute Product updatedProduct) {
+	        Product product = productRepository.findById(id).orElse(null);
+	        if (product != null) {
+	            product.setName(updatedProduct.getName());
+	            product.setCategory(updatedProduct.getCategory());
+	            product.setPriceFirst(updatedProduct.getPriceFirst());
+	            product.setPrice(updatedProduct.getPrice());
+	            product.setImageUrl(updatedProduct.getImageUrl());
+	            product.setImageUrlSe(updatedProduct.getImageUrlSe());
+	            product.setProductTop(updatedProduct.getProductTop());
+
+	            productRepository.save(product);
+	        }
+	        return "redirect:/leaders";
+	    }
+	  
 	 @GetMapping("/card/{usernamePrin}")
 	 public String card(@PathVariable String usernamePrin, Model model) {
 	     List<CartItem> ca = new ArrayList<>();
