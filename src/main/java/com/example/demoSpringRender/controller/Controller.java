@@ -54,6 +54,44 @@ public class Controller {
  
 		return "temp";
 	}
+	
+	@GetMapping("/showLoginPage")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("/leaders")
+	public String showLeader(Model model, Principal principal, @RequestParam(value = "searchTerm", required = false) String searchTerm) {
+		 List<Product> topProducts;
+	        List<Product> regularProducts;
+
+	        if (searchTerm != null && !searchTerm.isEmpty()) {
+	            // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm sản phẩm
+	            topProducts = productRepository.findByProductTopAndNameContaining(true, searchTerm);
+	            regularProducts = productRepository.findByNameContaining(searchTerm);
+	        } else {
+	            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phẩm
+	            topProducts = productRepository.findByProductTop(true);
+	            regularProducts = productRepository.findAll();
+	        }
+
+	        model.addAttribute("topProducts", topProducts);
+	        model.addAttribute("regularProducts", regularProducts);
+
+	        if (principal != null) {
+	            model.addAttribute("usernamePrin", principal.getName());
+	        } else {
+	            model.addAttribute("usernamePrin", "");
+	        }
+
+		return "leaders";
+	}
+	
+	@GetMapping("/errorLogin")
+	public String errorLogin() {
+		return "/errorLogin";
+	}
+	
 	//chi tiet san pham
 	 @GetMapping("/infoProduct/{productId}")
 	    public String infoProduct(@PathVariable Long productId, Model model) {
@@ -65,7 +103,7 @@ public class Controller {
 	            return "product";
 	        }
 
-	        // Xử lý khi không tìm thấy sản phẩm
+	      
 	        return "redirect:product";  
 	    }
 	
@@ -161,41 +199,26 @@ public class Controller {
 	        return "cart";
 	    }
 
-
-	@GetMapping("/showLoginPage")
-	public String login() {
-		return "login";
-	}
-	
-	@GetMapping("/leaders")
-	public String showLeader(Model model, Principal principal, @RequestParam(value = "searchTerm", required = false) String searchTerm) {
-		 List<Product> topProducts;
+	 @GetMapping("/removeProduct/{id}")
+	    public String removProduct(Principal principal, Model model,@PathVariable Long id) {
+	         
+	        Product productItem= productRepository.findById(id).orElse(null);
+	        BigDecimal totalPrice = BigDecimal.ZERO;
+	        if (productItem == null) {
+	            return "index";
+	        }
+	         productRepository.delete(productItem);
 	        List<Product> regularProducts;
 
-	        if (searchTerm != null && !searchTerm.isEmpty()) {
-	            // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm sản phẩm
-	            topProducts = productRepository.findByProductTopAndNameContaining(true, searchTerm);
-	            regularProducts = productRepository.findByNameContaining(searchTerm);
-	        } else {
-	            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phẩm
-	            topProducts = productRepository.findByProductTop(true);
 	            regularProducts = productRepository.findAll();
-	        }
-
-	        model.addAttribute("topProducts", topProducts);
+	        
 	        model.addAttribute("regularProducts", regularProducts);
+	        
+	       model.addAttribute("usernamePrin", principal.getName());
+	    
+	    
 
-	        if (principal != null) {
-	            model.addAttribute("usernamePrin", principal.getName());
-	        } else {
-	            model.addAttribute("usernamePrin", "");
-	        }
-
-		return "leaders";
-	}
-	
-	@GetMapping("/errorLogin")
-	public String errorLogin() {
-		return "/errorLogin";
-	}
+	        return "leaders";
+	    }
+	 
 }
