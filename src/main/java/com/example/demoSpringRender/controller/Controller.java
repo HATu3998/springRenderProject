@@ -54,8 +54,20 @@ public class Controller {
  
 		return "temp";
 	}
-	
+	//chi tiet san pham
+	 @GetMapping("/infoProduct/{productId}")
+	    public String infoProduct(@PathVariable Long productId, Model model) {
+	        // Tìm sản phẩm theo ID
+	        Optional<Product> product = productRepository.findById(productId);
 
+	        if (product.isPresent()) {
+	            model.addAttribute("product", product.get());
+	            return "product";
+	        }
+
+	        // Xử lý khi không tìm thấy sản phẩm
+	        return "redirect:product";  
+	    }
 	
 	 @GetMapping("/product/{productId}")
 	    public String showProduct(@PathVariable Long productId, Model model) {
@@ -78,7 +90,7 @@ public class Controller {
 	        Optional<Product> product = productRepository.findById(productId);
 
 	        if (product.isPresent()) {
-	            model.addAttribute("product", product.get());
+	            model.addAttribute("products", product.get());
 	            return "update";
 	        }
 

@@ -13,6 +13,13 @@
             margin: 20px;
             border: 1px solid #ddd;
             padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .product-grid7:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
 
         .product-image7 {
@@ -20,17 +27,19 @@
         }
 
         .product-image7 img {
-            width: 100%;
-            max-width: 100%;
+            width: auto; /* Allow the image to adjust its width */
+            max-height: 200px; /* Set a fixed maximum height */
+            max-width: 100%; /* Maintain aspect ratio */
         }
 
         .product-new-label {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 10px;
+            top: 10px;
             background: green;
             color: white;
             padding: 5px;
+            border-radius: 4px;
         }
 
         .product-content {
@@ -40,6 +49,7 @@
         .title {
             font-size: 1.2rem;
             margin: 5px 0;
+            color: #333;
         }
 
         .price {
@@ -60,6 +70,7 @@
             color: #fff;
             text-decoration: none;
             margin-right: 10px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -81,7 +92,7 @@
                     </div>
                 </div>
                 <div class="button-container">
-                    <a  th:href="'/product/' + ${product.id}" class="product-button">Update</a>
+                    <a th:href="'/product/' + ${product.id}" class="product-button">Update</a>
                     <a href="#" class="product-button">Delete</a>
                 </div>
             </div>

@@ -185,13 +185,12 @@
         <div th:each="product : ${product}" class="col-md-3 col-sm-6">
             <div class="product-grid7">
                 <div class="product-image7">
-                    <a th:href="'/product/' + ${product.id}">
+                
                         <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
-                    </a>
+                  
                     <ul class="social">
-                        <li><a href="#" class="fa fa-search"></a></li>
-                        <li><a href="#" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="#" class="fa fa-shopping-cart"></a></li>
+                     
+                        <li><a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a></li>
                     </ul>
                     <span class="product-new-label" th:if="${product.productTop}">New</span>
                 </div>

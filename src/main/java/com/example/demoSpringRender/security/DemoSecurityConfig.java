@@ -21,7 +21,7 @@ public class DemoSecurityConfig {
     	http.authorizeHttpRequests(configurer ->
         configurer
             .requestMatchers("/", "/product/**","/temp").permitAll()
-            .requestMatchers("/leaders").hasRole("ADMIN")
+            .requestMatchers("/leaders","proUpdate","update").hasRole("ADMIN")
             .anyRequest().authenticated()
     )
 
@@ -29,6 +29,7 @@ public class DemoSecurityConfig {
                 formLogin
                     .loginPage("/showLoginPage")
                     .loginProcessingUrl("/authenticateTheUser")
+                    .defaultSuccessUrl("/", true)
                     .permitAll()
             )
             .logout(logout -> logout.permitAll())
