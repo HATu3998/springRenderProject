@@ -52,7 +52,7 @@ public class CartController {
     	    // Lưu CartItem vào cơ sở dữ liệu
     	    cartItem = cartItemRepository.save(cartItem);
 
-    	    return "/";
+    	    return "redirect:temp";
     	}
 
    

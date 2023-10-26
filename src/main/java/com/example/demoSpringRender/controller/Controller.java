@@ -59,7 +59,12 @@ public class Controller {
 	public String login() {
 		return "login";
 	}
-	
+ 
+	@GetMapping("/addProduct")
+    public String showAddProductForm(Model model) {
+        model.addAttribute("product", new Product());
+        return "addProduct"; // Return the HTML form for adding a product
+    }
 	@GetMapping("/leaders")
 	public String showLeader(Model model, Principal principal, @RequestParam(value = "searchTerm", required = false) String searchTerm) {
 		 List<Product> topProducts;
@@ -90,6 +95,12 @@ public class Controller {
 	@GetMapping("/errorLogin")
 	public String errorLogin() {
 		return "/errorLogin";
+	}
+	@GetMapping("/leaderCart")
+	public String leaderCart(Model model) {
+		List<CartItem> ca=cartItemRepository.findAll();
+		   model.addAttribute("ca", ca);
+		return "/leaderCart";
 	}
 	
 	//chi tiet san pham
@@ -135,6 +146,27 @@ public class Controller {
 	        // Xử lý khi không tìm thấy sản phẩm
 	        return "redirect:update";  
 	    }
+	 //add sp
+	 @PostMapping("/addProduct")
+	    public String addProduct(Model model,@ModelAttribute Product product) {
+	        // Save the product to your database
+	        productRepository.save(product);
+	        
+	        
+	        List<Product> topProducts;
+	        List<Product> regularProducts;
+
+	         
+	            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phẩm
+	            topProducts = productRepository.findByProductTop(true);
+	            regularProducts = productRepository.findAll();
+	      
+	        model.addAttribute("topProducts", topProducts);
+	        model.addAttribute("regularProducts", regularProducts);
+	        
+	        return "redirect:leaders"; // Redirect to the product list page or any other appropriate page
+	    }
+
 	 //update controller
 	  @PostMapping("updateSP/update/{id}")
 	    public String updateProduct(@PathVariable Long id, @ModelAttribute Product updatedProduct) {
