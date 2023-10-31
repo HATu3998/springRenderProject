@@ -187,7 +187,7 @@
 <div class="container">
     <h3 class="h3">Shopping TOP</h3>
     <div class="row">
-        <div th:each="product : ${topProducts}" class="col-md-3 col-sm-6">
+        <div th:each="product : ${topProductsPage.content}" class="col-md-3 col-sm-6">
             <div class="product-grid7">
                 <div class="product-image7">
                     <a th:href="'/infoProduct/' + ${product.id}">
@@ -225,13 +225,33 @@
             </div>
         </div>
     </div>
+  <!-- Phân trang cho topProducts -->
+    <ul class="pagination">
+  <li class="page-item" th:if="${topProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/}">Trang đầu</a>
+</li>
+<li class="page-item" th:if="${topProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/(page=${topProductsPage.number - 1})}">Trang trước</a>
+</li>
+<li th:each="page : ${topProductsPage.totalPages}" th:class="${page == topProductsPage.number} ? 'page-item active' : 'page-item'">
+    <a class="page-link" th:href="@{/(page=${page})}">[[${page}]]</a>
+</li>
+<li class="page-item" th:if="${topProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${topProductsPage.number + 1})}">Trang sau</a>
+</li>
+<li class="page-item" th:if="${topProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${topProductsPage.totalPages})}">Trang cuối</a>
+</li>
+
+    </ul>
 </div>
 
 <hr>
 <div class="container">
     <h3 class="h3">Shopping TOP</h3>
     <div class="row">
-        <div th:each="product : ${regularProducts}" class="col-md-3 col-sm-6">
+      <div th:each="product : ${regularProductsPage.content}" class="col-md-3 col-sm-6">
+            <!-- Hiển thị sản phẩm từ danh sách regularProductsPage -->
             <div class="product-grid7">
                 <div class="product-image7">
                     <a th:href="'/product/' + ${product.id}">
@@ -272,6 +292,23 @@
             </div>
         </div>
     </div>
+     <ul class="pagination">
+        <li class="page-item" th:if="${regularProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/}">Trang đầu</a>
+</li>
+<li class="page-item" th:if="${regularProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/(page=${regularProductsPage.number - 1})}">Trang trước</a>
+</li>
+<li th:each="page : ${regularProductsPage.totalPages}" th:class="${page == regularProductsPage.number} ? 'page-item active' : 'page-item'">
+    <a class="page-link" th:href="@{/(page=${page})}">[[${page}]]</a>
+</li>
+<li class="page-item" th:if="${regularProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${regularProductsPage.number + 1})}">Trang sau</a>
+</li>
+<li class="page-item" th:if="${regularProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${regularProductsPage.totalPages})}">Trang cuối</a>
+</li>
+    </ul>
 </div>
 </body>
 </html>

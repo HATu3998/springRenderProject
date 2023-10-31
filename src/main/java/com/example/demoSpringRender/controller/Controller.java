@@ -1,4 +1,7 @@
 package com.example.demoSpringRender.controller;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -28,32 +31,24 @@ public class Controller {
     private ProductRepository productRepository;
     @Autowired
     private CartItemRepository cartItemRepository;
-	@GetMapping("/")
-	public String index(Model model, Principal principal, @RequestParam(value = "searchTerm", required = false) String searchTerm) {
-		 List<Product> topProducts;
-	        List<Product> regularProducts;
+    @GetMapping("/")
+    public String index(Model model, Principal principal, @PageableDefault(size =8, sort = "id") Pageable pageable) {
+        Page<Product> topProductsPage = productRepository.findByProductTopTrue(pageable);
+        Page<Product> regularProductsPage = productRepository.findByProductTopFalse(pageable);
 
-	        if (searchTerm != null && !searchTerm.isEmpty()) {
-	            // Nếu có từ khóa tìm kiếm, thực hiện tìm kiếm sản phẩm
-	            topProducts = productRepository.findByProductTopAndNameContaining(true, searchTerm);
-	            regularProducts = productRepository.findByNameContaining(searchTerm);
-	        } else {
-	            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phẩm
-	            topProducts = productRepository.findByProductTop(true);
-	            regularProducts = productRepository.findAll();
-	        }
+        model.addAttribute("topProductsPage", topProductsPage);
+        model.addAttribute("regularProductsPage", regularProductsPage);
 
-	        model.addAttribute("topProducts", topProducts);
-	        model.addAttribute("regularProducts", regularProducts);
+        if (principal != null) {
+            model.addAttribute("usernamePrin", principal.getName());
+        } else {
+            model.addAttribute("usernamePrin", "");
+        }
 
-	        if (principal != null) {
-	            model.addAttribute("usernamePrin", principal.getName());
-	        } else {
-	            model.addAttribute("usernamePrin", "");
-	        }
- 
-		return "temp";
-	}
+        return "temp";
+    }
+
+
 	
 	@GetMapping("/showLoginPage")
 	public String login() {
