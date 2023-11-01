@@ -48,7 +48,10 @@ public class Controller {
         return "temp";
     }
 
-
+    @GetMapping("/DangKy")
+	public String dangKy() {
+		return "DangKy";
+	}
 	
 	@GetMapping("/showLoginPage")
 	public String login() {

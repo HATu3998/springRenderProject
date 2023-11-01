@@ -20,7 +20,7 @@ public class DemoSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     	http.authorizeHttpRequests(configurer ->
         configurer
-            .requestMatchers("/", "/product/**","/temp").permitAll()
+            .requestMatchers("/", "/product/**","/temp","/DangKy","/send-verification-code","/verify-code").permitAll()
             .requestMatchers("/leaders","proUpdate","update").hasRole("ADMIN")
             .anyRequest().authenticated()
     )
