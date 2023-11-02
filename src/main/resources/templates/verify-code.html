@@ -4,7 +4,7 @@
     <title>Verification Code</title>
 </head>
 <body>
-    <form class="login-form" th:action="@{/check-verification-code}" method="post">
+    <form class="login-form" th:action="@{/verify-code}" method="post">
         <div th:if="${param.error}">
             <i>Mã xác nhận không hợp lệ</i>
         </div>
