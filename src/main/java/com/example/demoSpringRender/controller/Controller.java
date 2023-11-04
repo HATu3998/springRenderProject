@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demoSpringRender.repo.CartItemRepository;
 import com.example.demoSpringRender.repo.ProductRepository;
+import com.example.demoSpringRender.repo.UserRepository;
 import com.example.demoSpringRender.model.CartItem;
 import com.example.demoSpringRender.model.Product;
- 
+import com.example.demoSpringRender.model.User;
 
 import org.springframework.ui.Model;
 import java.util.*;
@@ -31,6 +32,8 @@ public class Controller {
     private ProductRepository productRepository;
     @Autowired
     private CartItemRepository cartItemRepository;
+    @Autowired
+    private UserRepository userRepository;
     @GetMapping("/")
     public String index(Model model, Principal principal, @PageableDefault(size =8, sort = "id") Pageable pageable) {
         Page<Product> topProductsPage = productRepository.findByProductTopTrue(pageable);
@@ -46,6 +49,13 @@ public class Controller {
         }
 
         return "temp";
+    }
+    
+    @GetMapping("/users")
+    public String showUserList(Model model) {
+        List<User> users = userRepository.findAll(); // Thay thế findAll() bằng phương thức truy vấn người dùng của bạn
+        model.addAttribute("users", users);
+        return "users";
     }
 
     @GetMapping("/DangKy")

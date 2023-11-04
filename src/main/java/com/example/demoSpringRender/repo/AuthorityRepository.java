@@ -11,4 +11,6 @@ import com.example.demoSpringRender.model.Authority;
 public interface AuthorityRepository extends JpaRepository<Authority, String> {
 	 @Query("SELECT a FROM Authority a WHERE a.username = :username")
 	    List<Authority> findAllByUsername(@Param("username") String username);
+
+	 
 }
