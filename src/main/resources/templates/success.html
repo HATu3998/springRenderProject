@@ -49,12 +49,12 @@ padding : 50px 0;
 <i>dang nhap khong thanh cong</i>
 </div>
   <div class="form-group">
-    <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-    <input type="text" name ="username" class="form-control" th:value="${param.email}" disabled="disabled">
+    <label for="e" class="text-uppercase">Email</label>
+    <input type="text" name ="e" class="form-control"  th:value="${param.email}" disabled="disabled">
     
   </div>
  
-
+    <input type="hidden" name="username" th:value="${param.email}" />
 
 <div class="form-group">
     <label for="password" class="text-uppercase">Mật khẩu</label>

@@ -63,7 +63,7 @@ public class VerificationController {
                authorRepo.save(authority);
                 model.addAttribute("error", "đăng ký thành công");
                 System.out.print("đăng kí thành công");
-                return "/";
+                return "login";
             } else {
             	  System.out.print("đăng kí ko thành công");
                 model.addAttribute("error", "Xác nhận mật khẩu không khớp");

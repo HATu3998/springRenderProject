@@ -30,15 +30,15 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Thêm dữ liệu vào cơ sở dữ liệu ở đây, ví dụ:
-        User user1 = new User("tu", "{noop}test123", 1);
+   //     User user1 = new User("tu", "{noop}test123", 1);
      //  userRepository.saveAll(Arrays.asList(user1 ));
-       User user2 = new User("susan", "{noop}test123", 1);
-        userRepository.saveAll(Arrays.asList(user1, user2));
+  //     User user2 = new User("susan", "{noop}test123", 1);
+  //      userRepository.saveAll(Arrays.asList(user1, user2));
 //        
-Authority au1=new Authority(user1.getUsername(), "ROLE_EMPLOYEE");
+//Authority au1=new Authority(user1.getUsername(), "ROLE_EMPLOYEE");
 //authorRepo.saveAll(Arrays.asList(au1 ));
-         Authority au2=new Authority(user2.getUsername(), "ROLE_ADMIN");
-        authorRepo.saveAll(Arrays.asList(au1,au2));
+   //      Authority au2=new Authority(user2.getUsername(), "ROLE_ADMIN");
+   //     authorRepo.saveAll(Arrays.asList(au1,au2));
 //        
 //        Product product1 = new Product("Quần Kaki Nam Cạp Chun Dáng Rộng Phối Túi Thời Trang Zenkocs3 MEN QUAN 049", "quan",new BigDecimal("300"), new BigDecimal("150"), "https://imgtr.ee/images/2023/10/05/ca41a824f3b912af190044778cf67639.jpeg","", false);
 //        Product product2 = new Product("Áo polo nam nữ local brand unisex Fearow Signature", "ao",  new BigDecimal("100"), new BigDecimal("50"), "https://imgtr.ee/images/2023/10/05/c02e496e2752f868fce0a3cdb3c85ec7.jpeg","", false);
