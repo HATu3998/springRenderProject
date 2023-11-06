@@ -12,7 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class DemoSecurityConfig {
- 
+//	  @Bean
+//	    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//	        return new BCryptPasswordEncoder();
+//	    }
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);

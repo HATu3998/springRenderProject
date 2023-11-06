@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import com.example.demoSpringRender.model.Product;
 import com.example.demoSpringRender.repo.CartItemRepository;
 import com.example.demoSpringRender.repo.ProductRepository;
 
-@RestController
+@Controller
 @RequestMapping("/api/cart")
 public class CartController {
     @Autowired
@@ -43,7 +44,7 @@ public class CartController {
     	    Product product = productRepository.findById(productId).orElse(null);
 
     	    if (product == null) {
-    	        return "/";
+    	        return "redirect:/";
     	    }
 
     	    // Tạo một đối tượng CartItem và lưu thông tin vào đó
@@ -52,7 +53,7 @@ public class CartController {
     	    // Lưu CartItem vào cơ sở dữ liệu
     	    cartItem = cartItemRepository.save(cartItem);
 
-    	    return "redirect:temp";
+    	    return "redirect:/";
     	}
 
    

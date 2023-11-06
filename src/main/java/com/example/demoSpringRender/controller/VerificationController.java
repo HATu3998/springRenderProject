@@ -11,26 +11,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+ 
 import java.util.Random;
 
 
 @Controller
 public class VerificationController {
 	  private final UserRepository userRepository;
-	    
-	    private final AuthorityRepository authorRepo;
+	 // private final PasswordEncoder passwordEncoder;
+	    private final AuthorityRepository authorityRepository;
 
 	    @Autowired
-	    public VerificationController(UserRepository userRepository , AuthorityRepository authorRepo) {
+	    public VerificationController(UserRepository userRepository,
+	    	//	PasswordEncoder passwordEncoder ,
+	    		AuthorityRepository authorRepo) {
 	        this.userRepository = userRepository;
-	   
-	        this.authorRepo=authorRepo;
+	     //   this.passwordEncoder = passwordEncoder;
+	        this.authorityRepository=authorRepo;
 	    } 
-//	   @Bean
-//	   public PasswordEncoder passwordEncoder() {
-//	       return new BCryptPasswordEncoder();
-//	   }
+ 
 	 
     @Autowired
     private EmailService emailService;
@@ -42,6 +41,10 @@ public class VerificationController {
         return "send-verification-code";
     }
     
+    
+
+    
+    
     @PostMapping("/userAdd")
     public String verifyCode( 
                             @RequestParam("username") String username, 
@@ -50,17 +53,15 @@ public class VerificationController {
                             Model model) {
       
             if (password.equals(confirmPassword)) {
-                // Lưu thông tin người dùng vào cơ sở dữ liệu
             	User user = new User(username,"{noop}"+password,1);
-             
-            //	user.setPassword(passwordEncoder().encode(password));
-            
+            //	User user = new User(username,passwordEncoder().encode(password),1);
+              
             	userRepository.save(user);
 
                 // Thêm quyền "ROLE_EMPLOYEE" cho người dùng mới đăng ký
                 Authority authority = new Authority(user.getUsername(),"ROLE_EMPLOYEE");
                 
-               authorRepo.save(authority);
+                authorityRepository.save(authority);
                 model.addAttribute("error", "đăng ký thành công");
                 System.out.print("đăng kí thành công");
                 return "login";
