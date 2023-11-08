@@ -65,9 +65,7 @@ padding : 50px 0;
       <small>Remember Me</small>
     </label>
     <button type="submit" class="btn btn-login float-right">Submit</button>
-    <div>
-<a  class="btn btn-login float-right" th:href="DangKy">Dang ky</a>
-</div>
+    
     <div th:if="${param.logout}">
 <i>logout thanh cong</i>
 </div>
@@ -75,7 +73,7 @@ padding : 50px 0;
   </div>
   
 </form>
-<div class="copy-text">Created with <i class="fa fa-heart"></i> by <a href="http://grafreez.com">Grafreez.com</a></div>
+<div class="copy-text">  <a th:href="DangKy">Register</a></div>
 		</div>
 		<div class="col-md-8 banner-sec">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

@@ -1,16 +1,15 @@
-	<!DOCTYPE html>
-	<html>
-	<head>
-	  <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/product.css">
-    
-	<style>
-h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
+<html>
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-/********************* shopping Demo-1 **********************/
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<style>
+ 
+
 .strikethrough {
         text-decoration: line-through;
     }
@@ -78,75 +77,35 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
     }
 }   
     
-    
-.product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
-.product-grid .product-image{position:relative;transition:all .3s ease 0s}
-.product-grid .product-image a{display:block}
-.product-grid .product-image img{width:100%;height:auto}
-.product-grid .pic-1{opacity:1;transition:all .3s ease-out 0s}
-.product-grid:hover .pic-1{opacity:1}
-.product-grid .pic-2{opacity:0;position:absolute;top:0;left:0;transition:all .3s ease-out 0s}
-.product-grid:hover .pic-2{opacity:1}
-.product-grid .social{width:150px;padding:0;margin:0;list-style:none;opacity:0;transform:translateY(-50%) translateX(-50%);position:absolute;top:60%;left:50%;z-index:1;transition:all .3s ease 0s}
-.product-grid:hover .social{opacity:1;top:50%}
-.product-grid .social li{display:inline-block}
-.product-grid .social li a{color:#fff;background-color:#333;font-size:16px;line-height:40px;text-align:center;height:40px;width:40px;margin:0 2px;display:block;position:relative;transition:all .3s ease-in-out}
-.product-grid .social li a:hover{color:#fff;background-color:#ef5777}
-.product-grid .social li a:after,.product-grid .social li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;letter-spacing:1px;line-height:20px;padding:1px 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
-.product-grid .social li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-20px;z-index:-1}
-.product-grid .social li a:hover:after,.product-grid .social li a:hover:before{opacity:1}
-.product-grid .product-discount-label,.product-grid .product-new-label{color:#fff;background-color:#ef5777;font-size:12px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
-.product-grid .product-discount-label{background-color:#333;left:auto;right:0}
-.product-grid .rating{color:#FFD200;font-size:12px;padding:12px 0 0;margin:0;list-style:none;position:relative;z-index:-1}
-.product-grid .rating li.disable{color:rgba(0,0,0,.2)}
-.product-grid .product-content{background-color:#fff;text-align:center;padding:12px 0;margin:0 auto;position:absolute;left:0;right:0;bottom:-27px;z-index:1;transition:all .3s}
-.product-grid:hover .product-content{bottom:0}
-.product-grid .title{font-size:13px;font-weight:400;letter-spacing:.5px;text-transform:capitalize;margin:0 0 10px;transition:all .3s ease 0s}
-.product-grid .title a{color:#828282}
-.product-grid .title a:hover,.product-grid:hover .title a{color:#ef5777}
-.product-grid .price{color:#333;font-size:17px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.6px;margin-bottom:8px;text-align:center;transition:all .3s}
-.product-grid .price span{color:#999;font-size:13px;font-weight:400;text-decoration:line-through;margin-left:3px;display:inline-block}
-.product-grid .add-to-cart{color:#000;font-size:13px;font-weight:600}
-@media only screen and (max-width:990px){.product-grid{margin-bottom:30px}
-}
 
-/********************* Shopping Demo-2 **********************/
-.demo{padding:45px 0}
-.product-grid2{font-family:'Open Sans',sans-serif;position:relative}
-.product-grid2 .product-image2{overflow:hidden;position:relative}
-.product-grid2 .product-image2 a{display:block}
-.product-grid2 .product-image2 img{width:100%;height:auto}
-.product-image2 .pic-1{opacity:1;transition:all .5s}
-.product-grid2:hover .product-image2 .pic-1{opacity:0}
-.product-image2 .pic-2{width:100%;height:100%;opacity:0;position:absolute;top:0;left:0;transition:all .5s}
-.product-grid2:hover .product-image2 .pic-2{opacity:1}
-.product-grid2 .social{padding:0;margin:0;position:absolute;bottom:50px;right:25px;z-index:1}
-.product-grid2 .social li{margin:0 0 10px;display:block;transform:translateX(100px);transition:all .5s}
-.product-grid2:hover .social li{transform:translateX(0)}
-.product-grid2:hover .social li:nth-child(2){transition-delay:.15s}
-.product-grid2:hover .social li:nth-child(3){transition-delay:.25s}
-.product-grid2 .social li a{color:#505050;background-color:#fff;font-size:17px;line-height:45px;text-align:center;height:45px;width:45px;border-radius:50%;display:block;transition:all .3s ease 0s}
-.product-grid2 .social li a:hover{color:#fff;background-color:#3498db;box-shadow:0 0 10px rgba(0,0,0,.5)}
-.product-grid2 .social li a:after,.product-grid2 .social li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;line-height:22px;border-radius:3px;padding:0 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
-.product-grid2 .social li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-22px;z-index:-1}
-.product-grid2 .social li a:hover:after,.product-grid2 .social li a:hover:before{opacity:1}
-.product-grid2 .add-to-cart{color:#fff;background-color:#404040;font-size:15px;text-align:center;width:100%;padding:10px 0;display:block;position:absolute;left:0;bottom:-100%;transition:all .3s}
-.product-grid2 .add-to-cart:hover{background-color:#3498db;text-decoration:none}
-.product-grid2:hover .add-to-cart{bottom:0}
-.product-grid2 .product-new-label{background-color:#3498db;color:#fff;font-size:17px;padding:5px 10px;position:absolute;right:0;top:0;transition:all .3s}
-.product-grid2:hover .product-new-label{opacity:0}
-.product-grid2 .product-content{padding:20px 10px;text-align:center}
-.product-grid2 .title{font-size:17px;margin:0 0 7px}
-.product-grid2 .title a{color:#303030}
-.product-grid2 .title a:hover{color:#3498db}
-.product-grid2 .price{color:#303030;font-size:15px}
-@media screen and (max-width:990px){.product-grid2{margin-bottom:30px}
-}
-	
-	</style>
-	</head>
-	<body>
-	 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
+
+
+.product-grid7{font-family:'Roboto Slab',serif;position:relative;z-index:1}
+.product-grid7 .product-image7{border:1px solid rgba(0,0,0,.1);overflow:hidden;perspective:1500px;position:relative;transition:all .3s ease 0s}
+.product-grid7 .product-image7 a{display:block}
+.product-grid7 .product-image7 img{width:100%;height:auto}
+.product-grid7 .pic-1{opacity:1;transition:all .5s ease-out 0s}
+.product-grid7 .pic-2{opacity:0;transform:rotateY(-90deg);position:absolute;top:0;left:0;transition:all .5s ease-out 0s}
+.product-grid7:hover .pic-2{opacity:1;transform:rotateY(0)}
+.product-grid7 .social{padding:0;margin:0;list-style:none;position:absolute;bottom:3px;left:-20%;z-index:1;transition:all .5s ease 0s}
+.product-grid7:hover .social{left:17px}
+.product-grid7 .social li a{color:#fff;background-color:#333;font-size:16px;line-height:40px;text-align:center;height:40px;width:40px;margin:15px 0;border-radius:50%;display:block;transition:all .5s ease-in-out}
+.product-grid7 .social li a:hover{color:#fff;background-color:#78e08f}
+.product-grid7 .product-new-label{color:#fff;background-color:#333;padding:5px 10px;border-radius:5px;display:block;position:absolute;top:10px;left:10px}
+.product-grid7 .product-content{text-align:center;padding:20px 0 0}
+.product-grid7 .title{font-size:15px;font-weight:600;text-transform:capitalize;margin:0 0 10px;transition:all .3s ease 0s}
+.product-grid7 .title a{color:#333}
+.product-grid7 .title a:hover{color:#78e08f}
+.product-grid7 .rating{color:#78e08f;font-size:12px;padding:0;margin:0 0 10px;list-style:none}
+.product-grid7 .price{color:#333;font-size:20px;font-family:Lora,serif;font-weight:700;margin-bottom:8px;text-align:center;transition:all .3s}
+.product-grid7 .price span{color:#999;font-size:14px;font-weight:700;text-decoration:line-through;margin-left:7px;display:inline-block}
+@media only screen and (max-width:990px){.product-grid7{margin-bottom:30px}
+}</style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-danger">
+
 	    <a class="navbar-brand" href="#">Your Brand</a>
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
@@ -160,7 +119,7 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	                <a class="nav-link" href="#">Products</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="#">About Us</a>
+	                <a class="nav-link" href="./users">About Us</a>
 	            </li>
 	            <li class="nav-item">
 	                <a class="nav-link" href="#">Contact</a>
@@ -169,7 +128,13 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	                <a class="nav-link" th:href="@{/leaders}">Quản lý</a>
 	            </li>
 	            <li class="nav-item" sec:authorize="isAuthenticated()">
-	                <form action="#" th:action="@{/logout}" method="POST" class="nav-link-form">
+	             
+	               <a class="nav-link" th:href="@{'/card/' + ${usernamePrin}}">Xem giỏ hàng</a ></li>
+  
+  <li class="nav-item" sec:authorize="isAuthenticated()">
+
+	           <form action="#" th:action="@{/logout}" method="POST" class="nav-link">
+	           
 	                    <input type="submit" name="logout" value="Đăng xuất" class="btn btn-link"/>
 	                </form>
 	            </li>
@@ -208,118 +173,146 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 	    </div>
 	</section>
 	<section class="search-sec">
-	    <div class="container">
-	        <form action="#" method="get" novalidate="novalidate">
-	            <div class="row">
-	                <div class="col-lg-12">
-	            <div class="search-bar">
-	    <input type="text" name="searchTerm" placeholder="Tìm kiếm sản phẩm...">
-	    <button type="submit">Tìm kiếm</button>
-	</div>
-	                    </div>
-	                </div>
-	            </div>
-	        </form>
-	    </div>
-	</section>
-	
-	
-	<div class="container">
-	    <h3 class="h3">shopping Top </h3>
-	    <div class="row">
-	        <div class="col-md-3 col-sm-6" th:each="product : ${topProducts}">
-	            <div class="product-grid2">
-	                <div class="product-image2">
-	                    <a  th:href="@{'/product/' + ${product.id}}">
-	                        <img class="pic-1" th:src="${product.imageUrl}">
-	                        <img class="pic-2" th:src="${product.imageUrlSe}">
-	                    </a>
-	                    <ul class="social">
-	                        <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-	                      
-	                         <li>
-	                        <form th:object="${product}" th:action="@{/api/cart/add}" method="post">
+    <div class="container">
+        <form th:action="@{/}" method="get" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="search-bar">
+                        <input type="text" th:name="searchTerm" placeholder="Tìm kiếm sản phẩm..." th:value="${searchTerm}">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 
-	                                <input type="hidden" name="productId" th:value="${product.id}" />
-	                                <input type="hidden" name="quantity" value="1" />
-	                                <input type="hidden" name="username" th:value="${usernamePrin}" />
-	                                <input type="hidden" name="price" th:value="${product.price}" />
-	                                <button type="submit" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
-	                            </form>
-	                        </li>
-	                    </ul>
-	                 
-	                </div>
-	                <div class="product-content">
-	                    <h3 class="title">  <h3 class="title"><a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a> </h3>
-	                   <div class="price">
-	                    <span class="strikethrough" th:text="${product.priceFirst}"></span>
-	                      <p th:text="${product.price}"></p>
+
+<div class="container">
+    <h3 class="h3">Shopping TOP</h3>
+    <div class="row">
+        <div th:each="product : ${topProductsPage.content}" class="col-md-3 col-sm-6">
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <a th:href="'/infoProduct/' + ${product.id}">
+                        <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
+                    </a>
+                    <ul class="social">
+                        <li><a  th:href="'/product/' + ${product.id}" class="fa fa-search"></a></li>
+                      
+                        <li><div th:if="${usernamePrin == null or usernamePrin.isEmpty()}">
+    <a th:href="@{/showLoginPage}" class="fa fa-shopping-cart"> </a>
+</div>
+<div th:if="${usernamePrin != null and !usernamePrin.isEmpty()}">
+ <a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a>
+
+</div></a></li>
+                    </ul>
+                    <span class="product-new-label" th:if="${product.productTop}">New</span>
+                </div>
+                <div class="product-content">
+               <a  th:href="'/product/' + ${product.id}">    <h3 class="title" th:text="${product.name}"></h3></a>   
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                      <div class="price">
+	                  <span class="strikethrough" th:utext="'$' + ${product.priceFirst}"></span>
+<p th:utext="'$' + ${product.price}"></p>
+
 	                        
 	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	
-	
-	
-	<hr>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<div class="container">
-	    <h3 class="h3">shopping</h3>
-	    <div class="row">
-	        <div class="col-md-3 col-sm-6" th:each="product : ${regularProducts}">
-	            <div class="product-grid">
-	                <div class="product-image">
-	                    <a href="#">
-	                        <img class="pic-1" th:src="${product.imageUrl}" />
-	                        <img class="pic-2" th:src="${product.imageUrlSe}" />
-	                    </a>
-	                    <ul class="social">
-	                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-	                        <li>
-	                            <form th:action="@{/api/cart/add}" method="post">
-	                                <input type="hidden" name="productId" th:value="${product.id}" />
-	                                <input type="hidden" name="quantity" value="1" />
-	                                <input type="hidden" name="username" th:value="${usernamePrin}" />
-	                                <input type="hidden" name="price" th:value="${product.price}" />
-	                                <button type="submit" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
-	                            </form>
-	                        </li>
-	                    </ul>
-	                    <span class="product-new-label">Sale</span>
-	              
-	                </div>
-	                <ul class="rating">
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star"></li>
-	                    <li class="fa fa-star disable"></li>
-	                </ul>
-	                <div class="product-content">
-	                  
-	                    <h3 class="title">  <h3 class="title"><a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a></h3></h3>
-	                    <div class="price">
-	                    <span th:text="${product.priceFirst}"></span>
-	                      <p th:text="${product.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Phân trang cho topProducts -->
+    <ul class="pagination">
+  <li class="page-item" th:if="${topProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/}">Trang đầu</a>
+</li>
+<li class="page-item" th:if="${topProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/(page=${topProductsPage.number - 1})}">Trang trước</a>
+</li>
+<li th:each="page : ${topProductsPage.totalPages}" th:class="${page == topProductsPage.number} ? 'page-item active' : 'page-item'">
+    <a class="page-link" th:href="@{/(page=${page})}">[[${page}]]</a>
+</li>
+<li class="page-item" th:if="${topProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${topProductsPage.number + 1})}">Trang sau</a>
+</li>
+<li class="page-item" th:if="${topProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${topProductsPage.totalPages})}">Trang cuối</a>
+</li>
+
+    </ul>
+</div>
+
+<hr>
+<div class="container">
+    <h3 class="h3">Shopping TOP</h3>
+    <div class="row">
+      <div th:each="product : ${regularProductsPage.content}" class="col-md-3 col-sm-6">
+            <!-- Hiển thị sản phẩm từ danh sách regularProductsPage -->
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <a th:href="'/product/' + ${product.id}">
+                        <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
+                    </a>
+                    <ul class="social">
+                        <li><a th:href="'/product/' + ${product.id}" class="fa fa-search"></a></li>
+                      
+                   <!-- Kiểm tra xem người dùng đã đăng nhập hay chưa -->
+  <li>
+<div th:if="${usernamePrin == null or usernamePrin.isEmpty()}">
+    <a th:href="@{/showLoginPage}" class="fa fa-shopping-cart"> </a>
+</div>
+<div th:if="${usernamePrin != null and !usernamePrin.isEmpty()}">
+ <a th:href="'/api/cart/add?productId=' + ${product.id} + '&quantity=1&username=' + ${usernamePrin} + '&price=' + ${product.price}" class="fa fa-shopping-cart"></a>
+
+</div>
+</li>
+                    </ul>
+                    <span class="product-new-label" th:if="${product.productTop}">New</span>
+                </div>
+                <div class="product-content">
+<a th:href="'/product/' + ${product.id}"><h3 class="title" th:text="${product.name}"></h3></a>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                      <div class="price">
+	                 <span class="strikethrough" th:utext="'$' + ${product.priceFirst}"></span>
+<p th:utext="'$' + ${product.price}"></p>
+
 	                        
 	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	
-	    
-	<hr>
-	  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    
-	
-	       
-	<hr>
-	
-	<hr>
-	</body>
-	</html>
+                </div>
+            </div>
+        </div>
+    </div>
+     <ul class="pagination">
+        <li class="page-item" th:if="${regularProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/}">Trang đầu</a>
+</li>
+<li class="page-item" th:if="${regularProductsPage.hasPrevious}">
+    <a class="page-link" th:href="@{/(page=${regularProductsPage.number - 1})}">Trang trước</a>
+</li>
+<li th:each="page : ${regularProductsPage.totalPages}" th:class="${page == regularProductsPage.number} ? 'page-item active' : 'page-item'">
+    <a class="page-link" th:href="@{/(page=${page})}">[[${page}]]</a>
+</li>
+<li class="page-item" th:if="${regularProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${regularProductsPage.number + 1})}">Trang sau</a>
+</li>
+<li class="page-item" th:if="${regularProductsPage.hasNext}">
+    <a class="page-link" th:href="@{/(page=${regularProductsPage.totalPages})}">Trang cuối</a>
+</li>
+    </ul>
+</div>
+</body>
+</html>
