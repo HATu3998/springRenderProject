@@ -25,7 +25,7 @@ import com.example.demoSpringRender.model.User;
 
 import org.springframework.ui.Model;
 import java.util.*;
-
+import org.springframework.security.core.Authentication;
 @org.springframework.stereotype.Controller
 public class Controller {
     @Autowired
@@ -34,10 +34,24 @@ public class Controller {
     private CartItemRepository cartItemRepository;
     @Autowired
     private UserRepository userRepository;
+    
+    
     @GetMapping("/")
-    public String index(Model model, Principal principal, @PageableDefault(size =8, sort = "id") Pageable pageable) {
-        Page<Product> topProductsPage = productRepository.findByProductTopTrue(pageable);
-        Page<Product> regularProductsPage = productRepository.findByProductTopFalse(pageable);
+    public String index(Model model ,Principal principal,  @PageableDefault(size = 8, sort = "id") Pageable pageable,
+            @RequestParam(name = "searchTerm", required = false) String searchTerm) {
+
+        Page<Product> topProductsPage;
+        Page<Product> regularProductsPage;
+
+        if (searchTerm != null && !searchTerm.isEmpty()) {
+            // Nếu có giá trị tìm kiếm, thực hiện truy vấn theo điều kiện tìm kiếm
+            topProductsPage = productRepository.findByProductTopAndNameContaining(true, searchTerm, pageable);
+            regularProductsPage = productRepository.findByProductTopAndNameContaining(false, searchTerm, pageable);
+        } else {
+            // Nếu không có giá trị tìm kiếm, truy vấn tất cả sản phẩm
+            topProductsPage = productRepository.findByProductTopTrue(pageable);
+            regularProductsPage = productRepository.findByProductTopFalse(pageable);
+        }
 
         model.addAttribute("topProductsPage", topProductsPage);
         model.addAttribute("regularProductsPage", regularProductsPage);
@@ -47,6 +61,7 @@ public class Controller {
         } else {
             model.addAttribute("usernamePrin", "");
         }
+      
 
         return "temp";
     }

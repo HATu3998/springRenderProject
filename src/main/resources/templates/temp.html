@@ -16,7 +16,7 @@
     position: absolute;
     top: 0;
 	left:0;
-	height:100%;
+	height:90%;
     width: 100%;
     background-attachment: fixed;
 }
@@ -46,7 +46,7 @@
     animation-fill-mode: both;
 }
 #myCarousel .container {max-width: 1430px;  }
-#myCarousel .carousel-item{height:100%; min-height:550px; }
+#myCarousel .carousel-item{height:70%; min-height:100px; }
 #myCarousel{position:relative; z-index:1; background:url(https://i.imgur.com/6axE29k.jpg) center center no-repeat; background-size:cover; }
 
 .carousel-control-next, .carousel-control-prev{height:40px; width:40px; padding:12px; top:50%; bottom:auto; transform:translateY(-50%); background-color: #f47735; }
@@ -221,6 +221,35 @@
 .product-grid7 .price span{color:#999;font-size:14px;font-weight:700;text-decoration:line-through;margin-left:7px;display:inline-block}
 @media only screen and (max-width:990px){.product-grid7{margin-bottom:30px}
 }
+    /* CSS cho thanh tìm kiếm */
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .search-bar input[type="text"] {
+        padding: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .search-bar button {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .search-bar button:hover {
+        background-color: #45a049;
+    }
 </style>
 <script>
         $(document).ready(function() {
@@ -232,44 +261,56 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-	    <a class="navbar-brand" href="#">Your Brand</a>
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="navbar-toggler-icon"></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="navbarNav">
-	        <ul class="navbar-nav ml-auto">
-	            <li class="nav-item active">
-	                <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href="#">Products</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href="./users">About Us</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href="#">Contact</a>
-	            </li>
-	            <li sec:authorize="hasRole('ADMIN')" class="nav-item">
-	                <a class="nav-link" th:href="@{/leaders}">Quản lý</a>
-	            </li>
-	            <li class="nav-item" sec:authorize="isAuthenticated()">
-	             
-	               <a class="nav-link" th:href="@{'/card/' + ${usernamePrin}}">Xem giỏ hàng</a ></li>
-  
-  <li class="nav-item" sec:authorize="isAuthenticated()">
-
-	           <form action="#" th:action="@{/logout}" method="POST" class="nav-link">
-	           
-	                    <input type="submit" name="logout" value="Đăng xuất" class="btn btn-link"/>
-	                </form>
-	            </li>
-	            <li class="nav-item" sec:authorize="!isAuthenticated()">
+    <div class="container">
+        <a class="navbar-brand" href="#">Your Brand</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="ml-auto">
+            <div class="search-bar">
+                <form th:action="@{/}" method="get" novalidate="novalidate">
+                    <input type="text" th:name="searchTerm" placeholder="Tìm kiếm sản phẩm..." th:value="${searchTerm}">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./users">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                    <a class="nav-link" th:href="@{/leaders}">Quản lý</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{'/card/' + ${usernamePrin}}">Xem giỏ hàng</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form action="#" th:action="@{/logout}" method="POST" class="nav-link">
+                        <input type="submit" name="logout" value="Đăng xuất" class="btn btn-link"/>
+                    </form>
+                </li>
+           
+                 <li class="nav-item" sec:authorize="!isAuthenticated()">
     <a class="nav-link" href="/login">Đăng nhập</a>
 </li>
-	        </ul>
-	    </div>
-	</nav>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
 	
 	
 
@@ -287,7 +328,7 @@
               <p>Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
                 necessitatibus praesentium voluptatum deleniti atque corrupti.</p>
               <a href="#">BUY NOW</a> </div>
-            <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.imgur.com/NKvkfTT.png" class="mx-auto" alt="slide"></div>
+            <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.ibb.co/QQL83fN/removal-ai-8c6cec98-41eb-499e-a8c8-f55160bc5d8b-vn-11134207-7qukw-ljdypb0bv4k2e8.png" class="mx-auto" alt="slide"></div>
           </div>
         </div>
       </div>
@@ -302,7 +343,7 @@
               <p>Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
                 necessitatibus praesentium voluptatum deleniti atque corrupti.</p>
               <a href="#">BUY NOW</a> </div>
-            <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.imgur.com/duWgXRs.png" class="mx-auto" alt="slide"></div>
+            <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.ibb.co/TmrLNnt/removal-ai-8bf53edb-a150-4d73-b59f-23724be78241-ba3191b02e3f88c325fc2fec21308fc3.png" class="mx-auto" alt="slide"></div>
           </div>
         </div>
       </div>
@@ -317,7 +358,7 @@
               <p>Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
                 necessitatibus praesentium voluptatum deleniti atque corrupti.</p>
               <a href="#">BUY NOW</a> </div>
-            <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.imgur.com/DGkR4OQ.png" class="mx-auto" alt="slide"></div>
+            <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.ibb.co/sgLw2wG/removal-ai-ac1ae666-0fa1-47f0-9a27-1333aed68820-vn-11134207-7r98o-lm0gxrfois4f74.png" alt="slide"></div>
           </div>
         </div>
       </div>
@@ -325,9 +366,7 @@
   </div>
   <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
 <!--slide end--> 
-
-
-
+ 
 
 <div class="container">
     <h3 class="h3">Shopping TOP</h3>
