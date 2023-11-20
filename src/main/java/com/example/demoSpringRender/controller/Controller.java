@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demoSpringRender.repo.CartItemRepository;
 import com.example.demoSpringRender.repo.ProductRepository;
@@ -207,6 +209,27 @@ public class Controller {
 	        }
 	        return "redirect:/leaders";
 	    }
+	  //update user enable
+	  @GetMapping("/userDisable/{usernamePrin}")
+	    public String updateUserDisable(@PathVariable String usernamePrin, @ModelAttribute User u) {
+	      
+	        User user= userRepository.findByUsername(usernamePrin);
+	        if (user != null) {
+	            user.setEnabled(0);
+	        	userRepository.save(user);
+	        }
+	        return "redirect:/users";
+	    }
+	  @GetMapping("/userEnabled/{usernamePrin}")
+	    public String updateUserEnable(@PathVariable String usernamePrin, @ModelAttribute User u) {
+	      
+	        User user= userRepository.findByUsername(usernamePrin);
+	        if (user != null) {
+	            user.setEnabled(1);
+	        	userRepository.save(user);
+	        }
+	        return "redirect:/users";
+	    }
 	  
 	 @GetMapping("/card/{usernamePrin}")
 	 public String card(@PathVariable String usernamePrin, Model model) {
@@ -276,4 +299,23 @@ public class Controller {
 	        return "leaders";
 	    }
 	 
+	 
+	 //khóa acc
+	  @PostMapping("/toggleUserStatus")
+	    @ResponseBody
+	    public ResponseEntity<String> toggleUserStatus(@RequestParam String username, @RequestParam int newStatus) {
+	        try {
+	            User user = userRepository.findById(username).orElse(null);
+
+	            if (user != null) {
+	                user.setEnabled(newStatus);
+	                userRepository.save(user);
+	                return ResponseEntity.ok("Trạng thái đã được cập nhật thành công!");
+	            } else {
+	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Người dùng không tồn tại!");
+	            }
+	        } catch (Exception e) {
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Đã xảy ra lỗi khi cập nhật trạng thái!");
+	        }
+	    }
 }
