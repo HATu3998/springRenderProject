@@ -58,7 +58,7 @@ public class DemoSecurityConfig {
     	http.authorizeHttpRequests(configurer ->
         configurer
             .requestMatchers("/", "/product/**","/temp","/DangKy","/send-verification-code","/verify-code","/userAdd","/verify-code").permitAll()
-            .requestMatchers("/leaders","proUpdate","update").hasRole("ADMIN")
+            .requestMatchers("/leaders","/proUpdate","/update","/leaderCart","/users").hasRole("ADMIN")
             .anyRequest().authenticated()
     )
 
