@@ -378,7 +378,7 @@
                         <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
                     </a>
                     <ul class="social">
-                        <li><a  th:href="'/product/' + ${product.id}" class="fa fa-search"></a></li>
+                        <li><a  th:href="'/infoProduct/' + ${product.id}" class="fa fa-search"></a></li>
                       
                         <li><div th:if="${usernamePrin == null or usernamePrin.isEmpty()}">
     <a th:href="@{/showLoginPage}" class="fa fa-shopping-cart"> </a>
@@ -438,7 +438,7 @@
             <!-- Hiển thị sản phẩm từ danh sách regularProductsPage -->
             <div class="product-grid7">
                 <div class="product-image7">
-                    <a th:href="'/product/' + ${product.id}">
+                    <a th:href="'/infoProduct/' + ${product.id}">
                         <img class="pic-1" th:src="${product.imageUrl}" alt="Product Image">
                     </a>
                     <ul class="social">
