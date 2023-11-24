@@ -100,6 +100,10 @@ h3 {
                 </table>
                 <!-- Hiển thị tổng giá trị ở đây -->
                 <p>Tổng giá trị: $<span th:text="${totalPrice}"></span></p>
+                <form action="/apply-discount" method="post">
+    <input type="text" name="discountCode" placeholder="Nhập mã giảm giá">
+    <button type="submit">Áp dụng</button>
+</form>
             </div>
         </div>
     </div>
