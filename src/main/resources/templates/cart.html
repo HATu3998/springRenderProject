@@ -95,15 +95,18 @@ h3 {
                             <td th:text="${item.quantity}"></td>
                             <td th:text="${item.total_price}"></td>
                             <td><a th:href="@{'/remove/' + ${item.id}}" class="btn btn-danger">Xóa</a></td>
-                        </tr>
+                       </tr>
                     </tbody>
                 </table>
                 <!-- Hiển thị tổng giá trị ở đây -->
-                <p>Tổng giá trị: $<span th:text="${totalPrice}"></span></p>
-                <form action="/apply-discount" method="post">
+                                   <form action="/apply-discount" method="get">
     <input type="text" name="discountCode" placeholder="Nhập mã giảm giá">
-    <button type="submit">Áp dụng</button>
+    <input type="text" name="usernamePrin" th:value="${usernamePrin}">
+    <button type="submit">Áp dụng</button> 
+    
 </form>
+                <p>Tổng giá trị: $<span th:text="${totalPrice}"></span></p>
+                 
             </div>
         </div>
     </div>
