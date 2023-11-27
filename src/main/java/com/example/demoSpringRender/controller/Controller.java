@@ -1,5 +1,6 @@
 package com.example.demoSpringRender.controller;
 import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demoSpringRender.repo.CartItemRepository;
+import com.example.demoSpringRender.repo.DiscountCodeRepository;
 import com.example.demoSpringRender.repo.ProductRepository;
 import com.example.demoSpringRender.repo.UserRepository;
 import com.example.demoSpringRender.model.CartItem;
+import com.example.demoSpringRender.model.DiscountCode;
 import com.example.demoSpringRender.model.Product;
 import com.example.demoSpringRender.model.User;
 
@@ -36,7 +39,8 @@ public class Controller {
     private CartItemRepository cartItemRepository;
     @Autowired
     private UserRepository userRepository;
-    
+    @Autowired
+    private DiscountCodeRepository discountCodeRepository;
     
     @GetMapping("/")
     public String index(Model model ,Principal principal,  @PageableDefault(size = 8, sort = "id") Pageable pageable,
@@ -276,6 +280,20 @@ public class Controller {
 
 	        return "cart";
 	    }
+	 @PostMapping("/removeDiscount")
+	 @Transactional
+	 public String removeDiscountsFromCart(Principal principal, Model model, @RequestParam("selectedCodes") List<Long> selectedCodes) {
+	     // Loop through the selected discount codes and delete them
+	     for (Long codeId : selectedCodes) {
+	         discountCodeRepository.deleteById(codeId);
+	     }
+
+	     // Reload the updated list of discount codes
+	     List<DiscountCode> discountCodes = discountCodeRepository.findAll();
+	     model.addAttribute("discountCodes", discountCodes);
+
+	     return "leaderDiscount";
+	 }
 
 	 @GetMapping("/removeProduct/{id}")
 	    public String removProduct(Principal principal, Model model,@PathVariable Long id) {

@@ -29,6 +29,12 @@ public class DiscountController {
         model.addAttribute("discountCodes", discountCodes);
         return "discounts"; // Tên view template (discounts.html)
     }
+    @GetMapping("/leaderDiscount")
+    public String showLeaderDiscount(Model model) {
+        List<DiscountCode> discountCodes = discountCodeRepository.findAll();
+        model.addAttribute("discountCodes", discountCodes);
+        return "leaderDiscount"; // Tên view template (discounts.html)
+    }
 
     
     @GetMapping("/apply-discount")
@@ -40,35 +46,29 @@ public class DiscountController {
             // Lấy giỏ hàng của người dùng từ cơ sở dữ liệu
             List<CartItem> cartItems = cartItemRepository.findByUsername(usernamePrin);
 
-            // Tính toán lại giá theo mã giảm giá
-            BigDecimal totalDiscount = BigDecimal.ZERO;
+            // Tính toán tổng giá trước khi áp dụng mã giảm giá
+            BigDecimal totalPriceBeforeDiscount = BigDecimal.ZERO;
             for (CartItem item : cartItems) {
-                BigDecimal discountAmount = item.getTotal_price().multiply(code.getDiscountPercent().divide(BigDecimal.valueOf(100)));
-                BigDecimal discountedPrice = item.getTotal_price().subtract(discountAmount);
-                item.setTotal_price(discountedPrice);
-                totalDiscount = totalDiscount.add(discountAmount);
+                totalPriceBeforeDiscount = totalPriceBeforeDiscount.add(item.getTotal_price());
             }
 
-            // Cập nhật giá trị tổng cuối cùng sau khi giảm giá
-            BigDecimal totalPrice = BigDecimal.ZERO;
-            for (CartItem item : cartItems) {
-                totalPrice = totalPrice.add(item.getTotal_price());
-            }
+            // Tính toán giảm giá dựa trên tổng giá trị giỏ hàng
+            BigDecimal discountAmount = totalPriceBeforeDiscount.multiply(code.getDiscountPercent().divide(BigDecimal.valueOf(100)));
+            BigDecimal totalPriceAfterDiscount = totalPriceBeforeDiscount.subtract(discountAmount);
 
             // Cập nhật lại giá trị tổng giá sau khi giảm giá
             model.addAttribute("ca", cartItems);
-            model.addAttribute("totalPrice", totalPrice);
-            model.addAttribute("discountAmount", totalDiscount);
+            model.addAttribute("totalPrice", totalPriceAfterDiscount);
+            model.addAttribute("discountAmount", discountAmount);
             model.addAttribute("discountInfo", code);
 
-            // Lưu lại thông tin giảm giá và cập nhật giỏ hàng trong cơ sở dữ liệu
+            // Có thể lưu thông tin giảm giá vào cơ sở dữ liệu tại đây nếu cần
 
-            cartItemRepository.saveAll(cartItems);
             return "cart"; // Trả về trang hiển thị thông tin giảm giá đã áp dụng
         } else {
             // Nếu mã giảm giá không tồn tại, xử lý thông báo lỗi
             model.addAttribute("errorMessage", "Mã giảm giá không hợp lệ");
-            return "discount-error"; // Trả về trang hiển thị thông báo lỗi
+            return "cart"; // Trả về trang hiển thị thông báo lỗi
         }
     }
 
